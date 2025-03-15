@@ -1,0 +1,36 @@
+{
+	"name": "react-pixel-motion",
+	"author": "Ga1az",
+	"private": false,
+	"version": "0.0.1",
+	"description": "A React component for animating sprites with pixelated motion",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/lib/main.d.ts",
+			"default": "./dist/main.js"
+		}
+	},
+	"files": ["dist"],
+	"scripts": {
+		"dev": "bun ./index.html",
+		"build": "bun build ./lib/main.ts --outdir ./dist",
+		"build:types": "tsc --emitDeclarationOnly --project ./tsconfig.lib.json --outDir ./dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ga1az/react-pixel-motion"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/react": "^19.0.10",
+		"@types/react-dom": "^19.0.4"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	}
+}

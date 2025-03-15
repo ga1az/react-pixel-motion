@@ -1,0 +1,9 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"composite": true,
+		"esModuleInterop": true,
+		"jsx": "react-jsx"
+	},
+	"include": ["lib"]
+}
