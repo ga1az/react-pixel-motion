@@ -9,6 +9,10 @@ A lightweight React component for creating smooth, pixelated sprite animations. 
 - 🔄 Control over animation speed, scale, and direction
 - 📱 Responsive and lightweight
 
+<div align="center">
+  <img src="./demo.gif" alt="Demo" width="50" />
+</div>
+
 ## Installation
 
 ```bash
@@ -27,9 +31,9 @@ bun add @ga1az/react-pixel-motion
 
 ## Usage
 
-```jsx
-import { PixelMotion } from '@ga1az/react-pixel-motion';
-import characterSprite from './assets/character.svg';
+```tsx
+import PixelMotion from "@ga1az/react-pixel-motion";
+import characterSprite from './assets/character.svg'; // or any other image format
 
 function App() {
   return (
