@@ -1,6 +1,6 @@
 # React Pixel Motion
 
-A lightweight React component for creating smooth, pixelated sprite animations. Perfect for games, retro-style interfaces, and pixel art animations.
+A lightweight React component for creating smooth, pixelated sprite animations. Perfect for games, retro-style interfaces, and pixel art animations. Totallyinspired by [react-sprite-animation](https://github.com/jcblw/react-sprite-animator).
 
 ## Features
 
@@ -60,3 +60,12 @@ function App() {
 | `shouldAnimate` | `boolean` | `true` | Whether the animation should play |
 | `scale` | `number` | `1` | Scale factor for the sprite |
 | `startFrame` | `number` | `0` | Initial frame to start the animation |
+
+## Development
+
+```bash
+bun install
+bun run dev # to run the demo
+bun run build # to build the library
+```
+
