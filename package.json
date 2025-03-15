@@ -2,22 +2,21 @@
 	"name": "@ga1az/react-pixel-motion",
 	"author": "Ga1az",
 	"private": false,
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A React component for animating sprites with pixelated motion",
 	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
-		".": {
-			"types": "./dist/lib/main.d.ts",
-			"default": "./dist/main.js"
-		}
+		"types": "./dist/index.d.ts",
+		"import": "./dist/index.js",
+		"require": "./dist/index.cjs"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"scripts": {
 		"dev": "bun ./index.html",
-		"build": "bun build ./lib/main.ts --outdir ./dist",
-		"build:types": "tsc --emitDeclarationOnly --project ./tsconfig.lib.json --outDir ./dist"
+		"build": "bun run build.ts"
 	},
 	"repository": {
 		"type": "git",
@@ -26,12 +25,14 @@
 	"devDependencies": {
 		"@types/bun": "latest",
 		"@types/react": "^19.0.10",
-		"@types/react-dom": "^19.0.4"
+		"@types/react-dom": "^19.0.4",
+		"bun-plugin-dts": "^0.3.0"
 	},
 	"peerDependencies": {
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
+		"oxc-transform": "^0.58.1",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
 	}
