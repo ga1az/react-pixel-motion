@@ -5,18 +5,19 @@
 	"version": "0.0.2",
 	"description": "A React component for animating sprites with pixelated motion",
 	"type": "module",
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"exports": {
-		"types": "./dist/index.d.ts",
-		"import": "./dist/index.js",
-		"require": "./dist/index.cjs"
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
 	},
+	"types": "./dist/index.d.ts",
 	"files": ["dist"],
 	"scripts": {
 		"dev": "bun ./index.html",
-		"build": "bun run build.ts"
+		"build": "bun run build.ts && ls -l dist/index.min.js && bun run generate-types",
+		"generate-types": "tsc -d ./lib/index.tsx --outDir dist --emitDeclarationOnly > /dev/null"
 	},
 	"repository": {
 		"type": "git",
@@ -26,7 +27,7 @@
 		"@types/bun": "latest",
 		"@types/react": "^19.0.10",
 		"@types/react-dom": "^19.0.4",
-		"bun-plugin-dts": "^0.3.0"
+		"esbuild": "^0.25.1"
 	},
 	"peerDependencies": {
 		"typescript": "^5.0.0"

@@ -1,4 +1,4 @@
-import { PixelMotion } from "../lib/main";
+import PixelMotion from "../lib";
 import guardaBot from "./assets/guardbot1.svg";
 
 function App() {
