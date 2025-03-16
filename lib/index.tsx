@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export interface StaticImageData {
+interface StaticImageData {
   src: string;
 }
 interface GridOptions {
@@ -163,4 +163,12 @@ const PixelMotion = ({
   return <div style={spriteStyles} />;
 };
 
-export default PixelMotion;
+export {
+  PixelMotion,
+  type PixelMotionProps,
+  type StaticImageData,
+  type GridOptions,
+  type BasePixelMotionProps,
+  type HorizontalOrVerticalProps,
+  type GridProps,
+};
