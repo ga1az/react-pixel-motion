@@ -7,7 +7,7 @@ interface GridOptions {
   gap?: number;
 }
 interface BasePixelMotionProps {
-  sprite: string;
+  sprite: string | { src: string };
   width: number;
   height: number;
   frameCount?: number;
@@ -60,7 +60,7 @@ const PixelMotion = ({
 
   useEffect(() => {
     const img = new Image();
-    img.src = sprite;
+    img.src = typeof sprite === "string" ? sprite : sprite.src;
     img.onload = () => setIsLoaded(true);
     img.onerror = () => {
       console.error("Error loading sprite");
