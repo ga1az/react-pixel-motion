@@ -2,7 +2,7 @@
 	"name": "@ga1az/react-pixel-motion",
 	"author": "Ga1az",
 	"private": false,
-	"version": "0.0.15",
+	"version": "0.0.16",
 	"description": "A React component for animating sprites with pixelated motion",
 	"type": "module",
 	"exports": {
@@ -12,6 +12,7 @@
 			"require": "./dist/index.cjs"
 		}
 	},
+	"homepage": "https://react-pixel-motion.ga1az.com/",
 	"types": "./dist/index.d.ts",
 	"files": ["dist"],
 	"scripts": {
