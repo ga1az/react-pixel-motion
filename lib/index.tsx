@@ -4,24 +4,26 @@ interface PixelMotionProps {
   sprite: string;
   width: number;
   height: number;
-  frameCount: number;
-  fps: number;
+  frameCount?: number;
+  fps?: number;
   direction?: "horizontal" | "vertical";
   shouldAnimate?: boolean;
   scale?: number;
   startFrame?: number;
+  loop?: boolean;
 }
 
 const PixelMotion = ({
   sprite, // URL for the sprite
   width, // Width of each frame
   height, // Height of each frame
-  frameCount, // Total number of frames
+  frameCount = 1, // Total number of frames
   fps = 60, // Frames per second
   direction = "horizontal", // 'horizontal' or 'vertical'
-  shouldAnimate = true, // Start/stop the animation
+  shouldAnimate = false, // Start/stop the animation
   scale = 1, // Sprite scale
   startFrame = 0, // Initial frame
+  loop = false, // Loop the animation
 }: PixelMotionProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentFrame, setCurrentFrame] = useState(startFrame);
@@ -46,7 +48,11 @@ const PixelMotion = ({
       if (deltaTime >= interval) {
         setCurrentFrame((prevFrame) => {
           const nextFrame = prevFrame + 1;
-          return nextFrame >= frameCount ? startFrame : nextFrame;
+          return nextFrame >= frameCount
+            ? loop
+              ? startFrame
+              : prevFrame
+            : nextFrame;
         });
         lastTime = currentTime - (deltaTime % interval);
       }
@@ -61,7 +67,7 @@ const PixelMotion = ({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isLoaded, shouldAnimate, fps, frameCount, startFrame]);
+  }, [isLoaded, shouldAnimate, fps, frameCount, startFrame, loop]);
 
   const getBackgroundPosition = () => {
     if (!isLoaded) return "0px 0px";

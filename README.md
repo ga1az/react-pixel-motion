@@ -58,12 +58,13 @@ function App() {
 | `sprite` | `string` | *Required* | URL or import of the sprite sheet image |
 | `width` | `number` | *Required* | Width of each frame in pixels |
 | `height` | `number` | *Required* | Height of each frame in pixels |
-| `frameCount` | `number` | *Required* | Total number of frames in the sprite sheet |
+| `frameCount` | `number` | `1` | Total number of frames in the sprite sheet |
 | `fps` | `number` | `60` | Frames per second for the animation |
 | `direction` | `'horizontal'` \| `'vertical'` | `'horizontal'` | Direction of the sprite sheet |
-| `shouldAnimate` | `boolean` | `true` | Whether the animation should play |
+| `shouldAnimate` | `boolean` | `false` | Whether the animation should play |
 | `scale` | `number` | `1` | Scale factor for the sprite |
 | `startFrame` | `number` | `0` | Initial frame to start the animation |
+| `loop` | `boolean` | `false` | Whether the animation should loop |
 
 ## Development
 
