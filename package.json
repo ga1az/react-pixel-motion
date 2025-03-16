@@ -2,7 +2,7 @@
 	"name": "@ga1az/react-pixel-motion",
 	"author": "Ga1az",
 	"private": false,
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"description": "A React component for animating sprites with pixelated motion",
 	"type": "module",
 	"exports": {
@@ -17,7 +17,7 @@
 	"scripts": {
 		"dev": "bun ./index.html",
 		"build": "bun run build.ts && ls -l dist/index.min.js && bun run generate-types",
-		"build:publish": "bun run build && npm publish --access public",
+		"publish": "npm publish --access public",
 		"generate-types": "tsc -d ./lib/index.tsx --outDir dist --emitDeclarationOnly > /dev/null"
 	},
 	"repository": {

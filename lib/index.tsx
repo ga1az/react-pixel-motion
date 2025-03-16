@@ -2,11 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 export interface StaticImageData {
   src: string;
-  height?: number;
-  width?: number;
-  blurDataURL?: string;
-  blurWidth?: number;
-  blurHeight?: number;
 }
 interface GridOptions {
   columns: number;
@@ -157,7 +152,9 @@ const PixelMotion = ({
   const spriteStyles: React.CSSProperties = {
     width: `${width * scale}px`,
     height: `${height * scale}px`,
-    backgroundImage: isLoaded ? `url(${sprite})` : "none",
+    backgroundImage: isLoaded
+      ? `url(${typeof sprite === "string" ? sprite : sprite.src})`
+      : "none",
     backgroundPosition: getBackgroundPosition(),
     backgroundSize: getBackgroundSize(),
     backgroundRepeat: "no-repeat",
