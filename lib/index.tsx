@@ -1,4 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+
+export interface StaticImageData {
+  src: string;
+  height?: number;
+  width?: number;
+  blurDataURL?: string;
+  blurWidth?: number;
+  blurHeight?: number;
+}
 interface GridOptions {
   columns: number;
   rows: number;
@@ -7,7 +16,7 @@ interface GridOptions {
   gap?: number;
 }
 interface BasePixelMotionProps {
-  sprite: string | { src: string };
+  sprite: string | StaticImageData;
   width: number;
   height: number;
   frameCount?: number;
