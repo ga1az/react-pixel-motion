@@ -50,7 +50,7 @@ bun add @ga1az/react-pixel-motion
 ## Usage
 
 ```tsx
-import PixelMotion from "@ga1az/react-pixel-motion";
+import { PixelMotion } from "@ga1az/react-pixel-motion";
 import characterSprite from './assets/character.svg'; // or any other image format
 import warrior from './assets/warrior.png';
 
@@ -93,7 +93,7 @@ function App() {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `sprite` | `string` | *Required* | URL or import of the sprite sheet image |
+| `sprite` | `string` \| `StaticImageData` | *Required* | URL or import of the sprite sheet image |
 | `width` | `number` | *Required* | Width of each frame in pixels |
 | `height` | `number` | *Required* | Height of each frame in pixels |
 | `frameCount` | `number` | `1` | Total number of frames in the sprite sheet |
