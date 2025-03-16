@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import PixelMotionComponent from "../lib/index";
+import { PixelMotion } from "../lib/index";
 import DirectionControls from "./components/direction-controls";
 import SpeedControl from "./components/speed-control";
 import guardaBot from "./assets/guardbot1.svg";
@@ -19,7 +19,7 @@ export default function Home() {
       <div style={styles.spriteContainer}>
         <div style={styles.spriteCard}>
           <h2 style={styles.spriteTitle}>Guard Bot</h2>
-          <PixelMotionComponent
+          <PixelMotion
             sprite={guardaBot}
             width={30}
             height={31}
@@ -34,7 +34,7 @@ export default function Home() {
 
         <div style={styles.spriteCard}>
           <h2 style={styles.spriteTitle}>Skeleton</h2>
-          <PixelMotionComponent
+          <PixelMotion
             sprite={skeleton}
             width={31}
             height={31}
@@ -47,7 +47,7 @@ export default function Home() {
       <div style={styles.interactiveContainer}>
         <div style={styles.spriteCard}>
           <h2 style={styles.spriteTitle}>Warrior ({fps} FPS)</h2>
-          <PixelMotionComponent
+          <PixelMotion
             sprite={warrior}
             width={30}
             height={30}
