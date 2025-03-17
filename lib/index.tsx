@@ -32,6 +32,18 @@ interface GridProps extends BasePixelMotionProps {
 }
 
 type PixelMotionProps = HorizontalOrVerticalProps | GridProps;
+
+type Accessory = PixelMotionProps & {
+  offsetX?: number;
+  offsetY?: number;
+  zIndex?: number;
+};
+
+interface SpriteWithAccessoriesProps {
+  mainSprite: PixelMotionProps;
+  accessories?: Accessory[];
+}
+
 const PixelMotion = ({
   sprite, // URL for the sprite
   width, // Width of each frame
@@ -163,8 +175,45 @@ const PixelMotion = ({
   return <div style={spriteStyles} />;
 };
 
+const SpriteWithAccessories = ({
+  mainSprite,
+  accessories = [],
+}: SpriteWithAccessoriesProps) => {
+  const { width, height, scale = 1 } = mainSprite;
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: width * scale,
+        height: height * scale,
+      }}
+    >
+      {/* Renderiza el sprite principal */}
+      <div style={{ position: "absolute", top: 0, left: 0, zIndex: 0 }}>
+        <PixelMotion {...mainSprite} />
+      </div>
+      {/* Renderiza los accesorios */}
+      {accessories.map((acc, index) => (
+        <div
+          key={index}
+          style={{
+            position: "absolute",
+            top: acc.offsetY || 0,
+            left: acc.offsetX || 0,
+            zIndex: acc.zIndex || 0,
+          }}
+        >
+          <PixelMotion {...acc} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export {
   PixelMotion,
+  SpriteWithAccessories,
   type PixelMotionProps,
   type StaticImageData,
   type GridOptions,

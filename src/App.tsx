@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { PixelMotion } from "../lib/index";
+import { PixelMotion, SpriteWithAccessories } from "../lib/index";
 import DirectionControls from "./components/direction-controls";
 import SpeedControl from "./components/speed-control";
 import guardaBot from "./assets/guardbot1.svg";
 import skeleton from "./assets/skeleton.png";
 import warrior from "./assets/warrior.png";
+
+import goblin from "./assets/goblin.png";
+import goblinSword from "./assets/sword.png";
 
 export default function Home() {
   const [rowIndex, setRowIndex] = useState<number | undefined>(0);
@@ -68,6 +71,42 @@ export default function Home() {
           <SpeedControl fps={fps} setFps={setFps} />
         </div>
       </div>
+
+      <SpriteWithAccessories
+        mainSprite={{
+          sprite: goblin,
+          width: 25,
+          height: 20,
+          scale: 5,
+          fps: 10,
+          shouldAnimate: true,
+          direction: "grid",
+          gridOptions: {
+            columns: 11,
+            rows: 5,
+            rowIndex: rowIndex,
+          },
+        }}
+        accessories={[
+          {
+            sprite: goblinSword,
+            width: 30,
+            height: 20,
+            scale: 5,
+            fps: 10,
+            shouldAnimate: true,
+            direction: "grid",
+            gridOptions: {
+              columns: 11,
+              rows: 5,
+              rowIndex: rowIndex,
+            },
+            offsetX: 0,
+            offsetY: 0,
+            zIndex: 1,
+          },
+        ]}
+      />
     </div>
   );
 }
