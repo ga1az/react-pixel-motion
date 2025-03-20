@@ -151,7 +151,7 @@ const PixelMotion = ({
   const animationRef = useRef<number | null>(null);
   const animationStarted = useRef(false);
   const previouslyAnimating = useRef(false);
-  const animationEndFired = useRef(false);
+  const hasAnimationEnded = useRef(false);
 
   const actualFrameCount = calculateFrameCount(
     direction,
@@ -168,7 +168,7 @@ const PixelMotion = ({
   useEffect(() => {
     if (shouldAnimate && !previouslyAnimating.current) {
       setState((prev) => ({ ...prev, currentFrame: startFrame }));
-      animationEndFired.current = false;
+      hasAnimationEnded.current = false;
     }
   }, [shouldAnimate, startFrame]);
 
@@ -207,8 +207,8 @@ const PixelMotion = ({
           const nextFrame = prev.currentFrame + 1;
           if (nextFrame >= actualFrameCount) {
             if (loop) return { ...prev, currentFrame: startFrame };
-            if (!animationEndFired.current && onAnimationEnd) {
-              animationEndFired.current = true;
+            if (!hasAnimationEnded.current && onAnimationEnd) {
+              hasAnimationEnded.current = true;
               setTimeout(() => onAnimationEnd(), 0);
               return { ...prev, currentFrame: startFrame };
             }
