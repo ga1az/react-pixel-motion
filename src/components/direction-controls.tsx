@@ -12,46 +12,80 @@ export default function DirectionControls({
   setRowIndex,
 }: DirectionControlsProps) {
   return (
-    <div style={styles.container}>
-      <h3 style={styles.title}>Direction</h3>
-      <div style={styles.buttonGrid}>
+    <div className="flex flex-col items-center gap-3">
+      <h3 className="text-sm font-medium text-gray-600">Direction</h3>
+      <div
+        className="grid grid-cols-3 gap-2"
+        style={{
+          gridTemplateAreas: `
+          ". up ."
+          "left center right"
+          ". down ."
+        `,
+        }}
+      >
         <button
-          style={{ ...styles.button, ...styles.topButton }}
+          type="button"
+          className={`w-10 h-10 flex items-center justify-center text-xl rounded-lg border ${
+            rowIndex === 0
+              ? "active"
+              : "bg-white border-gray-200 hover:bg-gray-100"
+          }`}
           onClick={() => setRowIndex(0)}
           aria-label="Move Up"
-          className={rowIndex === 0 ? "active" : ""}
+          style={{ gridArea: "up" }}
         >
           ⬆
         </button>
         <button
-          style={{ ...styles.button, ...styles.rightButton }}
+          type="button"
+          className={`w-10 h-10 flex items-center justify-center text-xl rounded-lg border ${
+            rowIndex === 1
+              ? "active"
+              : "bg-white border-gray-200 hover:bg-gray-100"
+          }`}
           onClick={() => setRowIndex(1)}
           aria-label="Move Right"
-          className={rowIndex === 1 ? "active" : ""}
+          style={{ gridArea: "right" }}
         >
           ➡
         </button>
         <button
-          style={{ ...styles.button, ...styles.bottomButton }}
+          type="button"
+          className={`w-10 h-10 flex items-center justify-center text-xl rounded-lg border ${
+            rowIndex === 2
+              ? "active"
+              : "bg-white border-gray-200 hover:bg-gray-100"
+          }`}
           onClick={() => setRowIndex(2)}
           aria-label="Move Down"
-          className={rowIndex === 2 ? "active" : ""}
+          style={{ gridArea: "down" }}
         >
           ⬇
         </button>
         <button
-          style={{ ...styles.button, ...styles.leftButton }}
+          type="button"
+          className={`w-10 h-10 flex items-center justify-center text-xl rounded-lg border ${
+            rowIndex === 3
+              ? "active"
+              : "bg-white border-gray-200 hover:bg-gray-100"
+          }`}
           onClick={() => setRowIndex(3)}
           aria-label="Move Left"
-          className={rowIndex === 3 ? "active" : ""}
+          style={{ gridArea: "left" }}
         >
           ⬅
         </button>
         <button
-          style={{ ...styles.button, ...styles.centerButton }}
+          type="button"
+          className={`w-10 h-10 flex items-center justify-center text-xl rounded-lg border ${
+            rowIndex === undefined
+              ? "active"
+              : "bg-white border-gray-200 hover:bg-gray-100"
+          }`}
           onClick={() => setRowIndex(undefined)}
           aria-label="Cycle All Directions"
-          className={rowIndex === undefined ? "active" : ""}
+          style={{ gridArea: "center" }}
         >
           🔁
         </button>
@@ -59,63 +93,3 @@ export default function DirectionControls({
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    gap: "0.75rem",
-  },
-  title: {
-    margin: 0,
-    fontSize: "1rem",
-    color: "#555",
-  },
-  buttonGrid: {
-    display: "grid",
-    gridTemplateAreas: `
-      ". up ."
-      "left center right"
-      ". down ."
-    `,
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gridTemplateRows: "repeat(3, 1fr)",
-    gap: "0.5rem",
-  },
-  button: {
-    width: "40px",
-    height: "40px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "1.25rem",
-    backgroundColor: "#f0f0f0",
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-    ":hover": {
-      backgroundColor: "#e0e0e0",
-    },
-    ":active": {
-      transform: "scale(0.95)",
-    },
-  },
-  topButton: {
-    gridArea: "up",
-  },
-  rightButton: {
-    gridArea: "right",
-  },
-  bottomButton: {
-    gridArea: "down",
-  },
-  leftButton: {
-    gridArea: "left",
-  },
-  centerButton: {
-    gridArea: "center",
-    backgroundColor: "#f5f5f5",
-  },
-};

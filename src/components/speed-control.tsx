@@ -13,63 +13,24 @@ export default function SpeedControl({ fps, setFps }: SpeedControlProps) {
   };
 
   return (
-    <div style={styles.container}>
-      <h3 style={styles.title}>Animation Speed</h3>
-      <div style={styles.controlWrapper}>
-        <span style={styles.label}>Slow</span>
+    <div className="flex flex-col items-center gap-3 mt-4">
+      <h3 className="text-sm font-medium text-gray-600">Animation Speed</h3>
+      <div className="flex items-center gap-3 w-full">
+        <span className="text-xs text-gray-500">Slow</span>
         <input
           type="range"
           min={1}
           max={60}
           value={fps}
           onChange={handleChange}
-          style={styles.slider}
+          className="w-full h-2 appearance-none bg-gray-200 rounded-full outline-none cursor-pointer accent-indigo-500"
           aria-label="Animation Speed"
         />
-        <span style={styles.label}>Fast</span>
+        <span className="text-xs text-gray-500">Fast</span>
       </div>
-      <div style={styles.valueDisplay}>{fps} FPS</div>
+      <div className="text-sm font-medium px-3 py-1 bg-gray-100 rounded-full text-gray-700">
+        {fps} FPS
+      </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    gap: "0.75rem",
-  },
-  title: {
-    margin: 0,
-    fontSize: "1rem",
-    color: "#555",
-  },
-  controlWrapper: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    width: "100%",
-  },
-  label: {
-    fontSize: "0.75rem",
-    color: "#777",
-  },
-  slider: {
-    width: "150px",
-    height: "8px",
-    appearance: "none" as const,
-    backgroundColor: "#e0e0e0",
-    borderRadius: "4px",
-    outline: "none",
-    cursor: "pointer",
-  },
-  valueDisplay: {
-    fontSize: "0.875rem",
-    fontWeight: "bold" as const,
-    color: "#555",
-    padding: "0.25rem 0.5rem",
-    backgroundColor: "#f0f0f0",
-    borderRadius: "4px",
-  },
-};

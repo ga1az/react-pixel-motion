@@ -5,132 +5,153 @@ import { PixelMotion } from "../lib/index";
 import DirectionControls from "./components/direction-controls";
 import SpeedControl from "./components/speed-control";
 import guardaBot from "./assets/guardbot1.svg";
+// @ts-ignore
 import skeleton from "./assets/skeleton.png";
+// @ts-ignore
 import warrior from "./assets/warrior.png";
+// @ts-ignore
+import superWarrior from "./assets/soldier.png";
 
 export default function Home() {
   const [rowIndex, setRowIndex] = useState<number | undefined>(0);
   const [fps, setFps] = useState<number>(10);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [frame, setFrame] = useState<number>(0);
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Pixel Motion Animations</h1>
+    <div className="min-h-screen bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <header className="mb-12 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Pixel Motion Animations
+          </h1>
+          <p className="text-gray-600">
+            Interactive sprite animations with React
+          </p>
+        </header>
 
-      <div style={styles.spriteContainer}>
-        <div style={styles.spriteCard}>
-          <h2 style={styles.spriteTitle}>Guard Bot</h2>
-          <PixelMotion
-            sprite={guardaBot}
-            width={30}
-            height={31}
-            startFrame={0}
-            frameCount={3}
-            scale={5}
-            shouldAnimate={true}
-            fps={10}
-            loop={true}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Guard Bot Section */}
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <h2 className="text-lg font-medium text-gray-900 mb-4">
+              Guard Bot
+            </h2>
+            <div className="flex justify-center">
+              <PixelMotion
+                sprite={guardaBot}
+                width={30}
+                height={31}
+                startFrame={0}
+                frameCount={3}
+                scale={5}
+                shouldAnimate={true}
+                fps={10}
+                loop={true}
+              />
+            </div>
+          </div>
+
+          {/* Skeleton Section */}
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <h2 className="text-lg font-medium text-gray-900 mb-4">Skeleton</h2>
+            <div className="flex justify-center">
+              <PixelMotion
+                sprite={skeleton}
+                width={31}
+                height={31}
+                startFrame={0}
+                scale={5}
+              />
+            </div>
+          </div>
         </div>
 
-        <div style={styles.spriteCard}>
-          <h2 style={styles.spriteTitle}>Skeleton</h2>
-          <PixelMotion
-            sprite={skeleton}
-            width={31}
-            height={31}
-            startFrame={0}
-            scale={5}
-          />
+        {/* Warrior with Controls Section */}
+        <div className="mt-10 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">
+            Warrior ({fps} FPS)
+          </h2>
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex justify-center">
+              <PixelMotion
+                sprite={warrior}
+                width={30}
+                height={30}
+                scale={5}
+                fps={fps}
+                shouldAnimate={true}
+                direction="grid"
+                gridOptions={{
+                  columns: 4,
+                  rows: 4,
+                  rowIndex: rowIndex,
+                }}
+              />
+            </div>
+            <div className="w-full md:w-auto">
+              <DirectionControls
+                rowIndex={rowIndex}
+                setRowIndex={setRowIndex}
+              />
+              <SpeedControl fps={fps} setFps={setFps} />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div style={styles.interactiveContainer}>
-        <div style={styles.spriteCard}>
-          <h2 style={styles.spriteTitle}>Warrior ({fps} FPS)</h2>
-          <PixelMotion
-            sprite={warrior}
-            width={30}
-            height={30}
-            scale={5}
-            fps={fps}
-            shouldAnimate={true}
-            direction="grid"
-            gridOptions={{
-              columns: 4,
-              rows: 4,
-              rowIndex: rowIndex,
-            }}
-          />
-        </div>
-
-        <div style={styles.controlsContainer}>
-          <DirectionControls rowIndex={rowIndex} setRowIndex={setRowIndex} />
-          <SpeedControl fps={fps} setFps={setFps} />
+        {/* Super Warrior Section */}
+        <div className="mt-10 bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative">
+          <span className="absolute top-2 right-2 text-gray-400 text-xs">
+            Art: Riley Gombart
+          </span>
+          <h2 className="text-lg font-medium text-gray-900 mb-4">
+            Super Warrior
+          </h2>
+          <div className="flex flex-col items-center gap-6">
+            <span className="">Frame: {frame}</span>
+            <div className="flex justify-center">
+              <PixelMotion
+                sprite={superWarrior}
+                width={30}
+                height={31}
+                startFrame={0}
+                frameCount={15}
+                fps={35}
+                shouldAnimate={isPlaying}
+                loop={false}
+                scale={10}
+                onAnimationStart={() => {
+                  console.log("La animación ha comenzado");
+                }}
+                onAnimationEnd={() => {
+                  console.log("La animación ha terminado");
+                  setIsPlaying(false);
+                }}
+                onFrameChange={(frameIndex) => {
+                  setFrame(frameIndex);
+                  console.log(`Frame actual: ${frameIndex}`);
+                }}
+                onSpecificFrame={{
+                  frame: [1, 2], // Trigger on frames 1 and 2
+                  callback: (frameIndex) =>
+                    console.log(`Special action on frame ${frameIndex}`),
+                }}
+              />
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsPlaying(true)}
+              disabled={isPlaying}
+              className={`px-5 py-2.5 rounded-lg font-medium transition-colors ${
+                isPlaying
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800"
+              }`}
+            >
+              {isPlaying ? "Attacking..." : "Attack!"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    padding: "2rem",
-    maxWidth: "1200px",
-    margin: "0 auto",
-    gap: "2rem",
-    backgroundColor: "#f5f5f5",
-    borderRadius: "8px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  },
-  title: {
-    fontSize: "2rem",
-    marginBottom: "1rem",
-    color: "#333",
-  },
-  spriteContainer: {
-    display: "flex",
-    flexWrap: "wrap" as const,
-    justifyContent: "center",
-    gap: "2rem",
-    width: "100%",
-  },
-  interactiveContainer: {
-    display: "flex",
-    flexWrap: "wrap" as const,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "2rem",
-    width: "100%",
-    padding: "1rem",
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-  },
-  spriteCard: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    padding: "1.5rem",
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    transition: "transform 0.2s ease",
-    cursor: "pointer",
-    ":hover": {
-      transform: "translateY(-5px)",
-    },
-  },
-  spriteTitle: {
-    fontSize: "1.25rem",
-    marginBottom: "1rem",
-    color: "#555",
-  },
-  controlsContainer: {
-    display: "flex",
-    gap: "1.5rem",
-    alignItems: "center",
-  },
-};

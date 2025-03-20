@@ -58,15 +58,17 @@ function App() {
   return (
     <PixelMotion
       sprite={characterSprite}
-      width={24} // Width of each frame in pixels
-      height={31} // Height of each frame in pixels
-      frameCount={3} // Total number of frames in the sprite sheet
-      fps={10} // Frames per second for the animation
-      scale={5} // Scale factor for the sprite
-      startFrame={0} // Initial frame to start the animation
-      loop={true} // Whether the animation should loop
-      shouldAnimate={true} // Whether the animation should play
-      direction="horizontal" // Direction of the sprite sheet
+      width={24} // Width of each frame in pixels (required)
+      height={31} // Height of each frame in pixels (required)
+      frameCount={3} // Total number of frames in the sprite sheet (optional)
+      fps={10} // Frames per second for the animation (optional)
+      scale={5} // Scale factor for the sprite (optional)
+      startFrame={0} // Initial frame to start the animation (optional)
+      loop={true} // Whether the animation should loop (optional)
+      shouldAnimate={true} // Whether the animation should play (optional)
+      direction="horizontal" // Direction of the sprite sheet (optional)
+      onAnimationEnd={() => console.log('Animation ended')} // Callback when animation ends (optional)
+      onAnimationStart={() => console.log('Animation started')} // Callback when animation starts (optional)
     />
     // Grid 4x4 example
     <PixelMotion
@@ -76,11 +78,27 @@ function App() {
       scale={5}
       fps={5}
       shouldAnimate={true}
-      direction="grid"
+      direction="grid" // Direction of the sprite sheet (optional)
       gridOptions={{
-        columns: 4, // Total columns in the sprite sheet
-        rows: 4, // Total rows in the sprite sheet
-        rowIndex: 0, // Index of the row to animate
+        columns: 4, // Total columns in the sprite sheet (required)
+        rows: 4, // Total rows in the sprite sheet (required)
+        rowIndex: 0, // Index of the row to animate (optional)
+      }}
+      onFrameChange={(frameIndex) => console.log(`Current frame: ${frameIndex}`)} // Callback for each frame change (optional)
+    />
+
+    // Example with specific frame callback
+    <PixelMotion
+      sprite={characterSprite}
+      width={24}
+      height={31}
+      frameCount={3}
+      fps={10}
+      scale={5}
+      shouldAnimate={true}
+      onSpecificFrame={{
+        frame: [1, 2], // Trigger on frames 1 and 2
+        callback: (frameIndex) => console.log(`Special action on frame ${frameIndex}`) // Callback for specific frames (optional)
       }}
     />
   );
@@ -90,6 +108,7 @@ function App() {
 ## API
 
 ### Props
+
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -102,8 +121,22 @@ function App() {
 | `shouldAnimate` | `boolean` | `false` | Whether the animation should play |
 | `scale` | `number` | `1` | Scale factor for the sprite |
 | `startFrame` | `number` | `0` | Initial frame to start the animation |
-| `loop` | `boolean` | `false` | Whether the animation should loop |
-| `gridOptions` | `{ columns: number, rows: number, rowIndex?: number, columnIndex?: number, gap?: number }` | `undefined` | Options for grid sprite sheets |
+| `loop` | `boolean` | `true` | Whether the animation should loop |
+| `gridOptions` | `object` | `undefined` | Options for grid sprite sheets (see Grid Options table) |
+| `onAnimationEnd` | `() => void` | `undefined` | Callback function when animation ends (only if loop=false) |
+| `onAnimationStart` | `() => void` | `undefined` | Callback function when animation starts |
+| `onFrameChange` | `(frameIndex: number) => void` | `undefined` | Callback function for each frame change |
+| `onSpecificFrame` | `{ frame: number \| number[], callback: (frameIndex: number) => void }` | `undefined` | Callback for specific frames |
+
+### Grid Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `columns` | `number` | *Required* | Number of columns in the grid |
+| `rows` | `number` | *Required* | Number of rows in the grid |
+| `rowIndex` | `number` | `undefined` | Index of the row to animate (animate horizontally) |
+| `columnIndex` | `number` | `undefined` | Index of the column to animate (animate vertically) |
+| `gap` | `number` | `0` | Gap between frames in pixels |
 
 ## Development
 
