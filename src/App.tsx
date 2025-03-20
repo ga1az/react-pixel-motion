@@ -10,7 +10,7 @@ import skeleton from "./assets/skeleton.png";
 // @ts-ignore
 import warrior from "./assets/warrior.png";
 // @ts-ignore
-import superWarrior from "./assets/soldier.png";
+import superWarrior from "./assets/soldier.webp";
 
 export default function Home() {
   const [rowIndex, setRowIndex] = useState<number | undefined>(0);
