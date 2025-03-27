@@ -67,6 +67,7 @@ function App() {
       loop={true} // Whether the animation should loop (optional)
       shouldAnimate={true} // Whether the animation should play (optional)
       direction="horizontal" // Direction of the sprite sheet (optional)
+      imageRendering={false} // Whether the image should be rendered in pixelated mode (optional - default is true)
       onAnimationEnd={() => console.log('Animation ended')} // Callback when animation ends (optional)
       onAnimationStart={() => console.log('Animation started')} // Callback when animation starts (optional)
     />
@@ -122,6 +123,7 @@ function App() {
 | `scale` | `number` | `1` | Scale factor for the sprite |
 | `startFrame` | `number` | `0` | Initial frame to start the animation |
 | `loop` | `boolean` | `true` | Whether the animation should loop |
+| `imageRendering` | `boolean` | `true` | Whether the image should be rendered in pixelated mode |
 | `gridOptions` | `object` | `undefined` | Options for grid sprite sheets (see Grid Options table) |
 | `onAnimationEnd` | `() => void` | `undefined` | Callback function when animation ends (only if loop=false) |
 | `onAnimationStart` | `() => void` | `undefined` | Callback function when animation starts |
