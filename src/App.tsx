@@ -119,6 +119,7 @@ export default function Home() {
                 shouldAnimate={isPlaying}
                 loop={false}
                 scale={10}
+                imageRendering={false}
                 onAnimationStart={() => {
                   console.log("La animación ha comenzado");
                 }}

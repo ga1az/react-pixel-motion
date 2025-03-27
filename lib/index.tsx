@@ -17,6 +17,7 @@ interface BasePixelMotionProps {
   frameCount?: number;
   fps?: number;
   shouldAnimate?: boolean;
+  imageRendering?: boolean;
   scale?: number;
   startFrame?: number;
   loop?: boolean;
@@ -138,6 +139,7 @@ const PixelMotion = ({
   scale = 1,
   startFrame = 0,
   loop = true,
+  imageRendering = true,
   gridOptions,
   onAnimationEnd,
   onAnimationStart,
@@ -260,7 +262,7 @@ const PixelMotion = ({
       gridOptions
     ),
     backgroundRepeat: "no-repeat",
-    imageRendering: "pixelated",
+    ...(imageRendering ? { imageRendering: "pixelated" } : {}),
   };
 
   return <div style={spriteStyles} />;
