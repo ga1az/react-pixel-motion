@@ -260,6 +260,7 @@ const PixelMotion = ({
       gridOptions
     ),
     backgroundRepeat: "no-repeat",
+    imageRendering: "pixelated",
   };
 
   return <div style={spriteStyles} />;
